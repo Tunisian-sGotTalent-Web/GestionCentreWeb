@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+
+        {% block javascripts %}{% endblock %}
+
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Tunisian's Got Talent </title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{asset('BundleClient/AppBundleClient/./img/core-img/favicon.png')}}">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{asset('BundleClient/AppBundleClient/style.css')}}">
+
+</head>
+
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div class="loader"></div>
+</div>
+<!-- /Preloader -->
+
+<!-- Top Search Form Area -->
+<div class="top-search-area">
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <!-- Close -->
+                    <button type="button" class="btn close-btn" data-dismiss="modal"><i class="ti-close"></i></button>
+                    <!-- Form -->
+                    <form action="index.html" method="post">
+                        <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enter...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Header Area Start -->
+<header class="header-area">
+    <!-- Main Header Start -->
+    <div class="main-header-area">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between" id="alimeNav">
+
+                    <!-- Logo -->
+                    <a class="nav-brand" href="{{asset('BundleClient/AppBundleClient/./index.html')}}"><img src="{{asset('BundleClient/AppBundleClient/./img/core-img/55.png')}}" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+                        <!-- Menu Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul id="nav">
+                                <li class="active"><a href="{{ path('pageAcceuil') }}">Accueil</a></li>
+
+                                <li><a href="#">Formations</a></li>
+                               <li> <a href="{{ path('indexFrontCentre') }}">centres</a></li>
+                                <li><a href="#">Challenge</a></li>
+                                <li><a href="#">Contactez-nous</a></li>
+                            </ul>
+
+                            <!-- Search Icon -->
+                            <div class="search-icon" data-toggle="modal" data-target="#searchModal"><i class="ti-search"></i></div>
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header Area End -->
+
+<!-- Welcome Area Start -->
+<section class="welcome-area">
+    <div class="welcome-slides owl-carousel">
+        <!-- Single Slide -->
+        <div class="single-welcome-slide bg-img bg-overlay" style="background-image: url({{asset('BundleClient/AppBundleClient/img/bg-img/674.png')}});">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <!-- Welcome Text -->
+                    <div class="col-12 col-lg-8 col-xl-6">
+                        <div class="welcome-text">
+                            {% block title %}
+                                <h2 data-animation="bounceInDown" data-delay="900ms"> Bienvenue<br>dans votre espace d'art</h2>
+
+                                <p data-animation="bounceInDown" data-delay="500ms">Voulez vous réaliser votre rêve?
+                                    Voulez vous mettre en lumière
+                                    votre talent ou bien voulez vous partagé votre savoir-faire dans un monde artistique? Rejoignez nous sur notre application Tunisia's Got Talent!
+                                </p>
+                            {% endblock %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Slide -->
+
+
+    </div>
+    {% block body %}{% endblock %}
+</section>
+<!-- Welcome Area End -->
+
+<!-- Gallery Area Start -->
+<!-- Gallery Area End -->
+
+<!-- Follow Area Start -->
+<section class="follow-area clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <h2>Follow Instagram</h2>
+                    <p>Tunisian's Got Talent</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instagram Feed Area -->
+    <div class="instragram-feed-area owl-carousel">
+        <!-- Single Instagram Item -->
+        <div class="single-instagram-item">
+            <img src="{{asset('BundleClient/AppBundleClient/img/bg-img/11.jpg')}}" alt="">
+            <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+                <a href="#">
+                    <i class="ti-instagram" aria-hidden="true"></i>
+                    <span>Tunisian's Got Talent</span>
+                </a>
+            </div>
+        </div>
+        <!-- Single Instagram Item -->
+        <div class="single-instagram-item">
+            <img src="{{asset('BundleClient/AppBundleClient/img/bg-img/12.jpg')}}" alt="">
+            <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+                <a href="#">
+                    <i class="ti-instagram" aria-hidden="true"></i>
+                    <span>Tunisian's Got Talent</span>
+                </a>
+            </div>
+        </div>
+        <!-- Single Instagram Item -->
+        <div class="single-instagram-item">
+            <img src="{{asset('BundleClient/AppBundleClient/img/bg-img/13.jpg')}}" alt="">
+            <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+                <a href="#">
+                    <i class="ti-instagram" aria-hidden="true"></i>
+                    <span>Tunisian's Got Talent</span>
+                </a>
+            </div>
+        </div>
+        <!-- Single Instagram Item -->
+        <div class="single-instagram-item">
+            <img src="{{asset('BundleClient/AppBundleClient/img/bg-img/14.jpg')}}" alt="">
+            <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+                <a href="#">
+                    <i class="ti-instagram" aria-hidden="true"></i>
+                    <span>Tunisian's Got Talent</span>
+                </a>
+            </div>
+        </div>
+        <!-- Single Instagram Item -->
+        <div class="single-instagram-item">
+            <img src="{{asset('BundleClient/AppBundleClient/img/bg-img/15.jpg')}}" alt="">
+            <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+                <a href="#">
+                    <i class="ti-instagram" aria-hidden="true"></i>
+                    <span>Tunisian's Got Talent</span>
+                </a>
+            </div>
+        </div>
+        <!-- Single Instagram Item -->
+        <div class="single-instagram-item">
+            <img src="{{asset('BundleClient/AppBundleClient/img/bg-img/16.jpg')}}" alt="">
+            <div class="instagram-hover-content text-center d-flex align-items-center justify-content-center">
+                <a href="#">
+                    <i class="ti-instagram" aria-hidden="true"></i>
+                    <span>Tunisian's Got Talent</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Follow Area End -->
+<!-- Footer Area Start -->
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="footer-content d-flex align-items-center justify-content-between">
+                    <!-- Copywrite Text -->
+                    <div class="copywrite-text">
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                    <!-- Footer Logo -->
+                    <div class="footer-logo">
+                        <a href="#"><img src="{{asset('BundleClient/AppBundleClient/img/core-img/55.png')}}" alt=""></a>
+                    </div>
+                    <!-- Social Info -->
+                    <div class="social-info">
+                        <a href="#"><i class="ti-facebook" aria-hidden="true"></i></a>
+                        <a href="#"><i class="ti-twitter-alt" aria-hidden="true"></i></a>
+                        <a href="#"><i class="ti-linkedin" aria-hidden="true"></i></a>
+                        <a href="#"><i class="ti-pinterest" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Area End -->
+
+<!-- **** All JS Files ***** -->
+<!-- jQuery 2.2.4 -->
+<script src="{{asset('BundleClient/AppBundleClient/js/jquery.min.js')}}"></script>
+<!-- Popper -->
+<script src="{{asset('BundleClient/AppBundleClient/js/popper.min.js')}}"></script>
+<!-- Bootstrap -->
+<script src="{{asset('BundleClient/AppBundleClient/js/bootstrap.min.js')}}"></script>
+<!-- All Plugins -->
+<script src="{{asset('BundleClient/AppBundleClient/js/alime.bundle.js')}}"></script>
+<!-- Active -->
+<script src="{{asset('BundleClient/AppBundleClient/js/default-assets/active.js')}}"></script>
+
+</body>
+
+</html>

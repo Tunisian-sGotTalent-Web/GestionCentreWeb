@@ -1,0 +1,45 @@
+{% extends 'base1.html.twig' %}
+ {% block title %}
+     <h2 data-animation="bounceInDown" data-delay="900ms">Découvrez les meilleurs <br>centres d'art en Tunisie</h2>
+     <p data-animation="bounceInDown" data-delay="500ms">Voulez vous réaliser votre rêve?
+         Voulez vous mettre en lumière
+         votre talent ou bien voulez vous partagé votre savoir-faire dans un monde artistique? Rejoignez nous sur notre application Tunisia's Got Talent!
+     </p>
+ {% endblock %}
+{% block body %}
+    <div class="row alime-portfolio">
+    <!-- Single Gallery Item -->
+    <div class="col-12 col-sm-6 col-lg-3 single_gallery_item nature mb-30 wow fadeInUp" data-wow-delay="100ms">
+
+    </div>
+    </div>
+    {% for centre in centres %}
+      <div class="alime-blog-area section-padding-80-0 mb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="single-post-area wow fadeInUpBig" data-wow-delay="100ms">
+                            <!-- Post Thumbnail -->
+                            <a href="#" class="post-thumbnail"><img src="{{ asset('uploads/images/' ~ centre.imageCentre) }}" alt=""></a>
+                            <!-- Post Catagory -->
+                            <a href="#" class="btn post-catagory">Tunisian's Got Talent</a>
+                            <!-- Post Conetent -->
+                            <div class="post-content">
+                                <div class="post-meta">
+
+                                </div>
+                                <a href="{{ path('showFrontCentre', { 'id': centre.id }) }}" class="post-title">{{ centre.nomCentre }} situé à {{ centre.adresseCentre }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+    {% endfor %}
+    <div>
+    <a class="btn alime-btn btn-2 mt-30 wow fadeInUp" data-wow-delay="500ms" href="">Voir la suite</a>
+    </div>
+{% endblock %}

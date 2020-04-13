@@ -1,0 +1,28 @@
+new:
+    path:     /centre/new
+    defaults: { _controller: CentreBundle:Centre:new }
+
+show:
+    path:     /centre/show
+    defaults: { _controller: CentreBundle:Centre:show }
+
+edit:
+    path:     /centre/edit/{image}
+    defaults: { _controller: CentreBundle:Centre:edit }
+
+delete:
+    path:     /centre/delete
+    defaults: { _controller: CentreBundle:Centre:delete }
+
+index:
+    path:     /index
+    defaults: { _controller: CentreBundle:Session:index }
+
+admin:
+    path:     /admin
+    defaults: { _controller: CentreBundle:Session:admin }
+
+
+display:
+    path:     /display
+    defaults: { _controller: CentreBundle:Notification:display }

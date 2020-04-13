@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <script src="{{asset('BundleClient/AppBundleClient/js/jquery-3.5.0.min.js')}}"></script>
+    <script src="{{asset('BundleClient/AppBundleClient/js/centreJquery.js')}}"></script>
+
+
+
+    <h1>Nouveau centre</h1>
+    <h2>Tapez les données de votre centre</h2>
+
+    {{ form_start(form) }}
+
+
+    {{ form_widget(form) }}
+
+    <input id="envoyer" type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('centre_index') }}">Back to the list</a>
+        </li>
+    </ul>
+
+{% endblock %}

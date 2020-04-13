@@ -1,0 +1,4 @@
+services:
+#    centre.example:
+#        class: CentreBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

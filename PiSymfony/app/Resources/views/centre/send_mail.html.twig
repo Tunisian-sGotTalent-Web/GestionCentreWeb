@@ -1,0 +1,30 @@
+{% extends "::base1.html.twig" %}
+
+{% block body %}
+{% set flashbag_notices = app.session.flashbag.get('notice') %}
+{% if flashbag_notices is not empty  %}
+<u1 class="msg">
+  {% for notice in flashbag_notices %}
+    <li>{{ notice }}</li>
+    {% endfor %}
+</u1>
+        {% endif %}
+        <div class="navbar navbar-inverse">
+            <div class="about-us-content mb-80">
+                <h3 class="wow fadeInUp" data-wow-delay="100ms">Vous allez envoyer un email à {{ centre.nomCentre }}</h3>
+                <div class="line wow fadeInUp" data-wow-delay="200ms"></div>
+                   </div>
+         </div>
+        {{ form_start(f) }}
+        {{ form_widget(f) }}
+        <table>
+            <tr>
+
+                <td><input type="submit" value="envoyer" class="btn alime-btn btn-2 mt-30 wow fadeInUp" data-wow-delay="500ms"></td>
+            </tr>
+        </table>
+
+{% endblock %}
+
+
+

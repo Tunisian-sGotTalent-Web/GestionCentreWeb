@@ -1,0 +1,28 @@
+
+
+{% block body %}
+   <p>You have 3 Notifications</p>
+
+   {%  for notif in notifications %}
+
+   <div class="notifi__item">
+      <div class="bg-c1 img-cir img-40">
+         <i class="zmdi zmdi-email-open"></i>
+      </div>
+      <div class="content">
+         <p>{{ notif.title }}</p>
+
+         <a href="{{ path('centre_index') }}">Vu {{ notif.description }} fois </a>
+
+      </div>
+   </div>
+   {% else %}
+      <h>Vous n'avez pas de notifications</h>
+   {% endfor %}
+
+   <div class="notifi__footer">
+      <a href="#">Voir statistiques</a>
+
+   </div>
+</div>
+{% endblock %}

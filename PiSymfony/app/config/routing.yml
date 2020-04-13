@@ -1,0 +1,53 @@
+centre:
+    resource: "@CentreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /User
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+indexFrontCentre:
+    path:     /centre/ne
+    defaults: { _controller: CentreBundle:Centre:indexFront }
+
+showFrontCentre:
+    path:     /centre/voirFront/{id}
+    defaults: { _controller: CentreBundle:Centre:showFront }
+
+pageAcceuil:
+    path:     /centre/pageAcceuil
+    defaults: { _controller: CentreBundle:Centre:acceuil }
+
+send_mail:
+    path:     /centre/sendMail/{id}
+    defaults: { _controller: CentreBundle:Mail:sendMail }
+
+
+delete1centre:
+    path:     /centre/delete1/{id}
+    defaults: { _controller: CentreBundle:Centre:delete1 }
+
+index:
+    path:     /index
+    defaults: { _controller: CentreBundle:Session:index }
+
+voirMonCompte:
+    path:     /voirmoncompte
+    defaults: { _controller: UserBundle:Default:voirmoncompte }
+
+notercentre:
+    path:     /notercentre/{id}
+    defaults: { _controller: CentreBundle:Centre:newNote }
+
+
+display:
+    path:     /display
+    defaults: { _controller: CentreBundle:Notification:display }
