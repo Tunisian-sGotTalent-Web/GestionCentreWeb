@@ -47,17 +47,17 @@
 
     <ul>
         <li>
-            <a href="{{ path('centre_index') }}">Retour à la liste</a>
+            <a href="{{ path('centre_index') }} " class="au-btn au-btn--blue js-load-bt" >Retour à la liste</a>
         </li>
         <li>
-            <a href="{{ path('centre_edit', { 'id': centre.id }) }}">Edit</a>
+            <a href="{{ path('centre_edit', { 'id': centre.id }) }}" class="au-btn au-btn--blue js-load-bt" >Edit</a>
         </li>
         <li>
 
             {{ form_start(delete_form) }}
 
 
-            <a href="{{ path('centre_delete', { 'id': centre.id }) }}">Supprimer</a>
+            <a href="{{ path('delete1centre', { 'id': centre.id }) }}"  class="au-btn bg-overlay--blue js-load-btn">Supprimer</a>
             {{ form_end(delete_form) }}
         </li>
     </ul>

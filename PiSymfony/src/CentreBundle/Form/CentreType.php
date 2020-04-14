@@ -18,7 +18,7 @@ class CentreType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nomCentre',null, ['label'=> 'Nom du centre'])->add('adresseCentre',null, ['label'=> 'Adresse du centre'])->add('dasCentre')->add('mailCentre',null, ['label'=> 'Contact du centre'])->add('telephoneCentre',null, ['label'=> 'Telephone'])->add('imageCentre',FileType::class)->add('save',SubmitType::class);
+        $builder->add('nomCentre',null, ['label'=> 'Nom du centre'])->add('adresseCentre',null, ['label'=> 'Adresse du centre'])->add('dasCentre')->add('mailCentre',null, ['label'=> 'Contact du centre'])->add('telephoneCentre',null, ['label'=> 'Telephone'])->add('imageCentre',FileType::class);
     }
     /**
      * {@inheritdoc}

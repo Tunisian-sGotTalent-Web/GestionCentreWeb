@@ -3,8 +3,10 @@
 namespace CentreBundle\Controller;
 
 use CentreBundle\Entity\Centre;
+use CentreBundle\Entity\CentreSearch;
 use CentreBundle\Entity\notecentre;
 use CentreBundle\Entity\Notification;
+use CentreBundle\Form\rechercheCentreType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,15 +26,43 @@ class CentreController extends Controller
      * @Route("/", name="centre_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $centres = $em->getRepository('CentreBundle:Centre')->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $notification=new Notification();
+        $notification=$em->getRepository("CentreBundle:Notification")->findAll();
+        foreach ($notification as $not)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $notificationmod=$em->getRepository("CentreBundle:Notification")->findBy(array('id'=>$not->getId()));
+            foreach ($notificationmod as $notmod) {
+                $notmod->setSeen(1);
+                $em->persist($notmod);
+                $em->flush();
+            }
+
+        }
+        $search=new CentreSearch();
+        $em=$this->getDoctrine()->getManager();
+        $touscentres=$em->getRepository('CentreBundle:Centre')->findAll();
+        $centres=$em->getRepository('CentreBundle:Centre')->findAll();
+        $form=$this->createForm(rechercheCentreType::class,$search);
+        $form->handleRequest($request);
+        if($form->isValid())
+        {
+            $centres=$em->getRepository('CentreBundle:Centre')->findBy(array('nomCentre'=>$search->getNom()));
+
+            return $this->render('centre/index.html.twig',array('form'=>$form->createView(),'centres'=>$centres,'touscentres'=>$touscentres));
+
+        }
 
         return $this->render('centre/index.html.twig', array(
-            'centres' => $centres,
+            'touscentres' => $touscentres,
+            'form'=>$form->createView(),
+            'centres'=>$centres,
         ));
+
     }
 
     public function indexFrontAction()
@@ -70,7 +100,7 @@ class CentreController extends Controller
                 $this->getParameter('images_directory'),$filename
             );
             $centre->setImageCentre($filename);
-            $centre->setNomCentre($request->get('nomcentre'));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($centre);
             $em->flush();
@@ -106,23 +136,43 @@ class CentreController extends Controller
         $notecentre->setIdCentre($centre->getId());
         $notecentre->setIdUser($user->getId());
         $em = $this->getDoctrine()->getManager();
+        $notecentre1=new notecentre();
+        $notecentre1=$em->getRepository("CentreBundle:notecentre")->findBy(array('idCentre'=>$centre->getId(),'idUser'=>$user->getId()));
+        if (count($notecentre1)==0)
+        {$this->CompareAction($notecentre,$centre);
+        }
+
+        else
+            return $this->render('centre/show3.html.twig', array(
+                'centre' => $centre,
+
+            ));
+        return $this->render('centre/show3.html.twig', array(
+            'centre' => $centre,
+
+        ));
+
+    }
+    public function CompareAction(notecentre $notecentre,Centre $centre)
+    {         $em = $this->getDoctrine()->getManager();
+
         $em->persist($notecentre);
         $em->flush();
 
-$centre->setVuCentre($centre->getVuCentre()+1);
-        $notication=new Notification();
+        $centre->setVuCentre($centre->getVuCentre() + 1);
+        $notication = new Notification();
         $notication
             ->setTitle($centre->getNomCentre())
             ->setDescription($centre->getVuCentre())
             ->setRoute('centre_index')
             ->setIcon($centre->getid())
-            ->setParameters(array('id'=>$centre->getId()));
+            ->setParameters(array('id' => $centre->getId()));
         $em->persist($notication);
         $em->flush();
-        $pusher=$this->get('mrad.pusher.notificaitons');
+        $pusher = $this->get('mrad.pusher.notificaitons');
         $pusher->trigger($notication);
-$this->getDoctrine()->getManager()->persist($centre);
-$em->flush();
+        $this->getDoctrine()->getManager()->persist($centre);
+        $em->flush();
         return $this->render('centre/show3.html.twig', array(
             'centre' => $centre,
 
@@ -181,7 +231,7 @@ $em->flush();
         $em->remove($centre);
         $em->flush();
 
-       // return $this->redirect($this->generateUrl('index_centre'));
+        // return $this->redirect($this->generateUrl('index_centre'));
     }
 
     /**
@@ -212,6 +262,13 @@ $em->flush();
 
         $em=$this->getDoctrine()->getManager();
         $centre=$em->getRepository("CentreBundle:Centre")->find($id);
+        $centrenote=$em->getRepository("CentreBundle:notecentre")->findBy(array('idCentre'=>$id));
+        foreach ($centrenote as $not)
+        {
+            $em->remove($not);
+            $em->flush();
+        }
+
         $em->remove($centre);
         $em->flush();
         return $this->redirect($this->generateUrl('centre_index'));
@@ -233,4 +290,20 @@ $em->flush();
 
 
     }
+    public function chercherCentreAction(Request  $request)
+    {
+        $search=new CentreSearch();
+        $em=$this->getDoctrine()->getManager();
+        $centres=$em->getRepository('CentreBundle:Centre')->findAll();
+        $form=$this->createForm(rechercheCentreType::class,$search);
+        $form->handleRequest($request);
+        if($form->isValid())
+        {
+            $centres=$em->getRepository('CentreBundle:Centre')->findBy(array('nomCentre'=>$search->getNom()));
+            return $this->render('centre/recherche.html.twig',array('Form'=>$form->createView(),'centres'=>$centres));
+
+        }
+        return $this->render('centre/recherche.html.twig',array('Form'=>$form->createView(),'centres'=>$centres));
+    }
+
 }

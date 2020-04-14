@@ -13,7 +13,7 @@
 
     </div>
     </div>
-    {% for centre in centres %}
+    {% for centre in centres|sort((a, b) => a.quantity > b.quantity)  %}
       <div class="alime-blog-area section-padding-80-0 mb-70">
             <div class="container">
                 <div class="row">

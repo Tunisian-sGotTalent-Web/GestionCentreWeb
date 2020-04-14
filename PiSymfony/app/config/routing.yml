@@ -1,7 +1,7 @@
 centre:
     resource: "@CentreBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /c
 
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
@@ -51,3 +51,8 @@ notercentre:
 display:
     path:     /display
     defaults: { _controller: CentreBundle:Notification:display }
+
+recherche:
+    path:     /recherche
+    defaults: { _controller: CentreBundle:Centre:chercherCentre }
+

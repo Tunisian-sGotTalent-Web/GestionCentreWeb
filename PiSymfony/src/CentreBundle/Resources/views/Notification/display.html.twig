@@ -1,7 +1,7 @@
 
 
 {% block body %}
-   <p>You have 3 Notifications</p>
+   <p>Vous avez {{ notifications|length }} notifications</p>
 
    {%  for notif in notifications %}
 
@@ -17,7 +17,7 @@
       </div>
    </div>
    {% else %}
-      <h>Vous n'avez pas de notifications</h>
+      <p>Vous n'avez pas de notifications</p>
    {% endfor %}
 
    <div class="notifi__footer">

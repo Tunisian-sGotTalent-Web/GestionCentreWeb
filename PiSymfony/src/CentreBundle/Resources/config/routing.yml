@@ -26,3 +26,8 @@ admin:
 display:
     path:     /display
     defaults: { _controller: CentreBundle:Notification:display }
+
+
+recherche:
+    path:     /recherche
+    defaults: { _controller: CentreBundle:Centre:chercherCentre }

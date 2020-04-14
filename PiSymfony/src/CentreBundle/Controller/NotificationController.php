@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class NotificationController extends Controller
 {
     public function displayAction()
-    { $notifications=$this->getDoctrine()->getRepository('CentreBundle:Notification')->findAll();
+    { $notifications=$this->getDoctrine()->getRepository('CentreBundle:Notification')->findBy(array('seen'=>'0'));
         return $this->render('CentreBundle:Notification:display.html.twig', array(
             'notifications'=>$notifications
         ));

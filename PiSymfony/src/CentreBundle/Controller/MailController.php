@@ -16,8 +16,8 @@ class MailController extends Controller
         if ($form->isSubmitted() && $form->isValid())
         {
             $subject=$mail->getSubject();
-            $mail=$mail->getMail();
-            $object=$request->get('form')['object'];
+            $maill=$mail->getMail();
+            $object=$mail->getObject();
             $username='hanebhar@gmail.com';
             $message=\Swift_Message::newInstance()
             ->setSubject($subject)
@@ -25,7 +25,7 @@ class MailController extends Controller
             ->setTo($centre->getMailCentre())
             ->setBody($object);
             $this->get('mailer')->send($message);
-            $this->get('session')->getFlashBag()->add('notice','Messge Envoyé avec Success');
+       //     $this->get('session')->getFlashBag()->add('notice','Messge Envoyé avec Success');
 
         }
         return $this->render('centre/send_mail.html.twig', array('f'=> $form->createView(),'centre'=>$centre));

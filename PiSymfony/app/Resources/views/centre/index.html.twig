@@ -1,7 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2 class="title-1 m-b-25"> Centres list</h2>
+    {% block head %}
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="form-row">
+            {{ form_row(form.nom) }}
+  </div>
+    </div>
+    <button  type="submit"  class="au-btn au-btn--blue js-load-bt" >
+        <i class="zmdi zmdi-search"></i>
+
+    </button>
+        {{ form_end(form) }}
+
+{% endblock %}
 <div class="au-task-list js-scrollbar3">
     <div class="au-task__item au-task__item--danger">
   <table  class="table table-borderless table-striped table-earning">
@@ -19,6 +32,8 @@
             </tr>
         </thead>
         <tbody>
+        {% if centres|length > 0 %}
+            <h1 class="title-1 m-b-25"> Centres cherchés</h1>
         {% for centre in centres %}
             <tr>
                 <td><a href="{{ path('centre_show', { 'id': centre.id }) }}">{{ centre.id }}</a></td>
@@ -48,6 +63,43 @@
                 </td>
             </tr>
         {% endfor %}
+        {% endif %}
+        {% if centres|length == 0 %}
+            <h1 class="title-1 m-b-25">Tous les centres</h1>
+            {% for centre in touscentres %}
+
+                <tr>
+                    <td><a href="{{ path('centre_show', { 'id': centre.id }) }}">{{ centre.id }}</a></td>
+                    <td>{{ centre.nomCentre }}</td>
+                    <td>{{ centre.adresseCentre }}</td>
+                    <td>{{ centre.dasCentre }}</td>
+                    <td>{{ centre.mailCentre }}</td>
+                    <td>{{ centre.telephoneCentre }}</td>
+                    <td><img src="{{ asset('uploads/images/' ~ centre.imageCentre) }}" height="100px" width="250px"></td>
+                    <td>{{ centre.vuCentre }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('centre_show', { 'id': centre.id }) }}" class="au-btn au-btn-load js-load-btn" class="item" data-toggle="tooltip" >Afficher</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ path('centre_edit', { 'id': centre.id }) }}" class="au-btn au-btn--blue js-load-bt">Modifier</a>
+                            </li>
+                            <li>
+                                <a href=" {{  path('delete1centre', {'id': centre.id }) }}"  class="au-btn bg-overlay--blue js-load-btn">Supprimer</a>
+
+                            </li>
+
+
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+
+
+
         </tbody>
     </table>
 

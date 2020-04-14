@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="title-1 m-b-25"> Centres list</h2>
+    <div class="au-task-list js-scrollbar3">
+        <div class="au-task__item au-task__item--danger">
+            <table  class="table table-borderless table-striped table-earning">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom du centre</th>
+                    <th>Adresse du centre</th>
+                    <th>Das du centre</th>
+                    <th>Email du centre</th>
+                    <th>Telephone du centre</th>
+                    <th>Image du centre</th>
+                    <th>Nombre de vu</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for centre in centres %}
+                    <tr>
+                        <td><a href="{{ path('centre_show', { 'id': centre.id }) }}">{{ centre.id }}</a></td>
+                        <td>{{ centre.nomCentre }}</td>
+                        <td>{{ centre.adresseCentre }}</td>
+                        <td>{{ centre.dasCentre }}</td>
+                        <td>{{ centre.mailCentre }}</td>
+                        <td>{{ centre.telephoneCentre }}</td>
+                        <td><img src="{{ asset('uploads/images/' ~ centre.imageCentre) }}" height="100px" width="250px"></td>
+                        <td>{{ centre.vuCentre }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('centre_show', { 'id': centre.id }) }}" class="au-btn au-btn-load js-load-btn" class="item" data-toggle="tooltip" >Afficher</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ path('centre_edit', { 'id': centre.id }) }}" class="au-btn au-btn--blue js-load-bt">Modifier</a>
+                                </li>
+                                <li>
+                                    <a href=" {{  path('delete1centre', {'id': centre.id }) }}"  class="au-btn bg-overlay--blue js-load-btn">Supprimer</a>
+
+                                </li>
+
+
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <ul>
+        <li>
+            <a href="{{ path('centre_new') }}" class="au-btn au-btn-load js-load-btn">Ajouter un autre centre</a>
+        </li>
+    </ul>
+{% endblock %}
