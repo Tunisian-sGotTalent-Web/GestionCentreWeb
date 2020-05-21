@@ -27,7 +27,34 @@ display:
     path:     /display
     defaults: { _controller: CentreBundle:Notification:display }
 
-
 recherche:
     path:     /recherche
     defaults: { _controller: CentreBundle:Centre:chercherCentre }
+
+
+all:
+    path:     /centre/all
+    defaults: { _controller: CentreBundle:Centre:alltest }
+
+supprimercentre:
+    path:     /centre/supprimer
+    defaults: { _controller: CentreBundle:Centre:SupprimerCentre }
+
+chercherCentremobile:
+    path:     /centre/cherchermobile
+    defaults: { _controller: CentreBundle:Centre:chercherCentremobile }
+
+
+modifier:
+    path:     /centre/modifier
+    defaults: { _controller: CentreBundle:Centre:modifier }
+
+
+chercherCentreParIdmobile:
+    path:     /centre/chercherParId
+    defaults: { _controller: CentreBundle:Centre:chercherCentreParIdmobile }
+
+modifierNbVu:
+    path:     /centre/modifiervu
+    defaults: { _controller: CentreBundle:Centre:modifierNbVu }
+

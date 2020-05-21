@@ -1,7 +1,7 @@
 centre:
     resource: "@CentreBundle/Controller/"
     type:     annotation
-    prefix:   /c
+    prefix:   /api
 
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
@@ -56,3 +56,36 @@ recherche:
     path:     /recherche
     defaults: { _controller: CentreBundle:Centre:chercherCentre }
 
+alltest:
+    path:     /centre/all
+    defaults: { _controller: CentreBundle:Centre:alltest }
+
+
+addcentre:
+    path:     /centre/new
+    defaults: { _controller: CentreBundle:Centre:AddCentre }
+
+
+supprimercentre:
+    path:     /centre/supprimer
+    defaults: { _controller: CentreBundle:Centre:SupprimerCentre }
+
+chercherCentremobile:
+    path:     /centre/cherchermobile
+    defaults: { _controller: CentreBundle:Centre:chercherCentremobile }
+
+modifier:
+    path:     /centre/modifier
+    defaults: { _controller: CentreBundle:Centre:modifier }
+
+chercherCentreParIdmobile:
+    path:     /centre/chercherParId
+    defaults: { _controller: CentreBundle:Centre:chercherCentreParIdmobile }
+
+modifierNbVu:
+    path:     /centre/modifiervu
+    defaults: { _controller: CentreBundle:Centre:modifierNbVu }
+
+chercherCentreParIdVumobile:
+    path:     /centre/modifiervuid
+    defaults: { _controller: CentreBundle:Centre:chercherCentreParIdVumobile }

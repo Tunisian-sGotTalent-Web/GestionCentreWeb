@@ -57,7 +57,7 @@ class Centre implements NotifiableInterface
 
     /**
      * @var int
-     * @Assert\Range(min=200,max=500)
+
      *  @Assert\NotBlank()
      * @ORM\Column(name="telephone_centre", type="integer", nullable=true)
      */

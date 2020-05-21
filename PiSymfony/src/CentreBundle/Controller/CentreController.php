@@ -11,7 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Centre controller.
@@ -305,5 +308,132 @@ class CentreController extends Controller
         }
         return $this->render('centre/recherche.html.twig',array('Form'=>$form->createView(),'centres'=>$centres));
     }
+    /**
+     * Lists all centre entities.
+     *
+     * @Route("/all", name="all")
+     * @Method("GET")
+     */
+    public function alltestAction()
+    {
+        $centre=$this->getDoctrine()->getManager()->getRepository('CentreBundle:Centre')
+            ->findAll();
+        $serialize=new Serializer([new ObjectNormalizer()]);
+        $formatted=$serialize->normalize($centre);
+        return new JsonResponse($formatted);
+    }
+    public function AddCentreAction(Request $request)
+    {    $em = $this->getDoctrine()->getManager();
+
+        $centre=new Centre();
+        $centre->setNomCentre($request->get('nomCentre'));
+        $centre->setAdresseCentre($request->get('adresseCentre'));
+        $centre->setDasCentre($request->get('dasCentre'));
+        $centre->setImageCentre($request->get('imageCentre'));
+        $centre->setMailCentre($request->get('mailCentre'));
+        $centre->setTelephoneCentre($request->get('telephoneCentre'));
+
+       $em->persist($centre);
+        $em->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($centre);
+        return new JsonResponse($formatted,200);
+    }
+    public function SupprimerCentreAction(Request $request)
+    { $em = $this->getDoctrine()->getManager();
+        $idCentreFromUrl=$request->get('id');
+        $centre=$em->getRepository('CentreBundle:Centre')->find($idCentreFromUrl);
+        $em->remove($centre);
+        $em->flush();
+        return new JsonResponse('works', 200);
+    }
+
+    public function chercherCentremobileAction(Request  $request)
+    {
+
+        $em=$this->getDoctrine()->getManager();
+     $nomcentre=$request->get('nomCentre');
+            $centres=$em->getRepository('CentreBundle:Centre')->findBy(array('nomCentre'=>$nomcentre));
+foreach ($centres as $cent)
+{
+    $em = $this->getDoctrine()->getManager();
+    $centmod=$em->getRepository("CentreBundle:Centre")->findBy(array('id'=>$cent->getId()));
+    foreach ($centmod as $c) {
+        $c->setVuCentre($c->getVuCentre()+1);
+
+        $em->flush();
+    }
+
+}
+
+        $serialize=new Serializer([new ObjectNormalizer()]);
+        $formatted=$serialize->normalize($centres);
+        return new JsonResponse($formatted);
+    }
+    public function chercherCentreParIdmobileAction(Request  $request)
+    {
+
+        $em=$this->getDoctrine()->getManager();
+        $id=$request->get('id');
+        $centres=$em->getRepository('CentreBundle:Centre')->findBy(array('id'=>$id));
+
+
+        $serialize=new Serializer([new ObjectNormalizer()]);
+        $formatted=$serialize->normalize($centres);
+        return new JsonResponse($formatted);
+    }
+    public function chercherCentreParIdVumobileAction(Request  $request)
+    {
+
+        $em=$this->getDoctrine()->getManager();
+
+        $centre=$em->getRepository('CentreBundle:Centre')->find($request->get('id'));
+
+
+      //  $centre->setVuCentre($centre->getVuCentre()+1);
+        // $em->persist($centre);
+        //$em->flush();
+
+        $serialize=new Serializer([new ObjectNormalizer()]);
+        $formatted=$serialize->normalize($centre);
+        return new JsonResponse($formatted);
+    }
+    public function modifierAction(Request $request)
+    {
+       //  $editForm->handleRequest($request);
+
+        $em=$this->getDoctrine()->getManager();
+        $centre=$em->getRepository('CentreBundle:Centre')->find($request->get('id'));
+
+        $centre->setNomCentre($request->get('nomCentre'));
+        $centre->setAdresseCentre($request->get('adresseCentre'));
+        $centre->setDasCentre($request->get('dasCentre'));
+        $centre->setImageCentre($request->get('imageCentre'));
+        $centre->setMailCentre($request->get('mailCentre'));
+        $centre->setTelephoneCentre($request->get('telephoneCentre'));
+           // $em->persist($centre);
+            $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($centre);
+        return new JsonResponse($formatted);
+    }
+    public function modifierNbVuAction(Request $request)
+    {
+        //  $editForm->handleRequest($request);
+
+        $em=$this->getDoctrine()->getManager();
+        $centre=$em->getRepository('CentreBundle:Centre')->find($request->get('id'));
+
+
+        $centre->setVuCentre($centre->getVuCentre()+1);
+        // $em->persist($centre);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($centre);
+        return new JsonResponse($formatted);
+    }
+
+
 
 }
